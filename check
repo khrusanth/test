@@ -24,3 +24,33 @@ public class MyController {
 spring.application.name=SpringReactConnectionDemo
 server.address=0.0.0.0
 
+
+function App() {
+  let [call, setCall] = useState('');
+
+  let Call = () => {
+    alert("Hello from the button!");
+    fetch("http://192.168.1.6:8080/hello")
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  })
+  .then(data => setCall(data.message))
+  .catch(err => {
+    console.error('Error fetching data:', err);
+    setCall('Error fetching data');
+  });
+  };
+
+  return (
+    <section>
+      <div>
+        <h1>Hello there!..</h1>
+        <input type='button' value='Click Me!' onClick={Call} />
+        <div>{call}</div>
+      </div>
+    </section>
+  );
+}
+
+export default App;
