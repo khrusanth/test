@@ -30,3 +30,20 @@ function App() {
 }
 
 export default App;
+
+
+
+//fix
+
+
+fetch("http://192.168.1.6:8080/hello")
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  })
+  .then(data => setCall(data.message))
+  .catch(err => {
+    console.error('Error fetching data:', err);
+    setCall('Error fetching data');
+  });
+
